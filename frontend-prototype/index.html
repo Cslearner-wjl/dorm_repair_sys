@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宿舍报修管理系统前端原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="prototype-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img class="brand-mark" src="./assets/brand-mark.png" alt="宿舍报修管理系统标识" />
+          <div>
+            <strong>宿舍报修管理系统</strong>
+            <span>Dormitory Repair Management</span>
+          </div>
+        </div>
+
+        <div class="role-panel">
+          <label for="roleSelect">当前角色</label>
+          <select id="roleSelect">
+            <option value="student">学生用户</option>
+            <option value="admin">管理员</option>
+            <option value="repair">维修人员</option>
+          </select>
+        </div>
+
+        <nav class="nav-group" id="navMenu" aria-label="主导航"></nav>
+
+        <div class="sidebar-note">
+          <span>流程闭环</span>
+          <strong>提交 / 审核 / 派单 / 处理 / 确认 / 评价</strong>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="page-heading">
+            <p class="eyebrow" id="roleName">学生用户</p>
+            <h1 id="pageTitle">学生首页</h1>
+          </div>
+          <div class="topbar-meta">
+            <span>2026年6月27日 星期六</span>
+            <button class="icon-button" type="button" aria-label="通知">铃</button>
+            <button class="icon-button" type="button" aria-label="设置">设</button>
+            <div class="user-chip">
+              <span class="avatar">张</span>
+              <strong id="userName">张同学</strong>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span>搜索</span>
+              <input type="search" placeholder="单号、宿舍、姓名" />
+            </label>
+            <button class="ghost-button" type="button">导出演示数据</button>
+            <button class="primary-button" type="button" id="quickAction">新增报修</button>
+          </div>
+        </header>
+
+        <section class="view active" id="view-dashboard"></section>
+        <section class="view" id="view-create"></section>
+        <section class="view" id="view-orders"></section>
+        <section class="view" id="view-dispatch"></section>
+        <section class="view" id="view-repair-submit"></section>
+        <section class="view" id="view-feedback"></section>
+        <section class="view" id="view-detail"></section>
+        <section class="view" id="view-users"></section>
+        <section class="view" id="view-auth"></section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
