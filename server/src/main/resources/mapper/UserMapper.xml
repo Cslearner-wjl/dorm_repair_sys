@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorm.repair.mapper.UserMapper">
+
+  <resultMap id="UserResultMap" type="com.dorm.repair.entity.User">
+    <id column="id" property="id"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <result column="real_name" property="realName"/>
+    <result column="phone" property="phone"/>
+    <result column="role" property="role"/>
+    <result column="status" property="status"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <result column="deleted_at" property="deletedAt"/>
+  </resultMap>
+
+  <sql id="UserColumns">
+    id, username, password, real_name, phone, role, status, created_at, updated_at, deleted_at
+  </sql>
+
+  <insert id="insert" parameterType="com.dorm.repair.entity.User"
+          useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO users (
+      username, password, real_name, phone, role, status
+    ) VALUES (
+      #{username}, #{password}, #{realName}, #{phone}, #{role}, #{status}
+    )
+  </insert>
+
+  <select id="findById" resultMap="UserResultMap">
+    SELECT <include refid="UserColumns"/>
+    FROM users
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+    LIMIT 1
+  </select>
+
+  <select id="findByUsername" resultMap="UserResultMap">
+    SELECT <include refid="UserColumns"/>
+    FROM users
+    WHERE username = #{username}
+    LIMIT 1
+  </select>
+
+  <sql id="UserFilter">
+    deleted_at IS NULL
+    <if test="role != null">
+      AND role = #{role}
+    </if>
+    <if test="keyword != null and keyword != ''">
+      AND (
+        username LIKE CONCAT('%', #{keyword}, '%')
+        OR real_name LIKE CONCAT('%', #{keyword}, '%')
+        OR phone LIKE CONCAT('%', #{keyword}, '%')
+      )
+    </if>
+  </sql>
+
+  <select id="countUsers" resultType="long">
+    SELECT COUNT(*)
+    FROM users
+    WHERE <include refid="UserFilter"/>
+  </select>
+
+  <select id="listUsers" resultMap="UserResultMap">
+    SELECT <include refid="UserColumns"/>
+    FROM users
+    WHERE <include refid="UserFilter"/>
+    ORDER BY id DESC
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+
+  <select id="listRepairers" resultMap="UserResultMap">
+    SELECT <include refid="UserColumns"/>
+    FROM users
+    WHERE role = 'REPAIR'
+      AND status = 1
+      AND deleted_at IS NULL
+    ORDER BY id DESC
+  </select>
+
+  <update id="updateBaseInfo" parameterType="com.dorm.repair.entity.User">
+    UPDATE users
+    SET real_name = #{realName},
+        phone = #{phone}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="updateRole">
+    UPDATE users
+    SET role = #{role}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="updateStatus">
+    UPDATE users
+    SET status = #{status}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="softDelete">
+    UPDATE users
+    SET deleted_at = NOW()
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+</mapper>

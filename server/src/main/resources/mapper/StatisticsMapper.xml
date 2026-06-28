@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorm.repair.mapper.StatisticsMapper">
+
+  <resultMap id="StatisticItemResultMap" type="com.dorm.repair.vo.StatisticItemVO">
+    <result column="name" property="name"/>
+    <result column="count" property="count"/>
+  </resultMap>
+
+  <resultMap id="RepairerStatisticResultMap" type="com.dorm.repair.vo.RepairerStatisticVO">
+    <id column="repairer_id" property="repairerId"/>
+    <result column="repairer_name" property="repairerName"/>
+    <result column="active_count" property="activeCount"/>
+    <result column="completed_count" property="completedCount"/>
+    <result column="average_score" property="averageScore"/>
+  </resultMap>
+
+  <resultMap id="DailyStatisticResultMap" type="com.dorm.repair.vo.DailyStatisticVO">
+    <result column="date" property="date"/>
+    <result column="created_count" property="createdCount"/>
+    <result column="completed_count" property="completedCount"/>
+  </resultMap>
+
+  <select id="countOrders" resultType="long">
+    SELECT COUNT(*)
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+  </select>
+
+  <select id="countOrdersByStatus" resultType="long">
+    SELECT COUNT(*)
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+      AND status = #{status}
+  </select>
+
+  <select id="averageScore" resultType="double">
+    SELECT ROUND(AVG(score), 2)
+    FROM repair_feedbacks
+  </select>
+
+  <select id="listStatusStats" resultMap="StatisticItemResultMap">
+    SELECT status AS name,
+           COUNT(*) AS count
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+    GROUP BY status
+    ORDER BY count DESC, status ASC
+  </select>
+
+  <select id="listCategoryStats" resultMap="StatisticItemResultMap">
+    SELECT category AS name,
+           COUNT(*) AS count
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+    GROUP BY category
+    ORDER BY count DESC, category ASC
+  </select>
+
+  <select id="listBuildingStats" resultMap="StatisticItemResultMap">
+    SELECT dorm_building AS name,
+           COUNT(*) AS count
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+    GROUP BY dorm_building
+    ORDER BY count DESC, dorm_building ASC
+  </select>
+
+  <select id="listDailyStats" resultMap="DailyStatisticResultMap">
+    WITH RECURSIVE dates AS (
+      SELECT DATE_SUB(CURDATE(), INTERVAL (#{days} - 1) DAY) AS stat_date
+      UNION ALL
+      SELECT DATE_ADD(stat_date, INTERVAL 1 DAY)
+      FROM dates
+      WHERE stat_date &lt; CURDATE()
+    )
+    SELECT DATE_FORMAT(d.stat_date, '%Y-%m-%d') AS date,
+           COUNT(DISTINCT CASE WHEN DATE(o.created_at) = d.stat_date THEN o.id END) AS created_count,
+           COUNT(DISTINCT CASE WHEN DATE(o.completed_at) = d.stat_date AND o.status = 'COMPLETED' THEN o.id END)
+             AS completed_count
+    FROM dates d
+    LEFT JOIN repair_orders o ON o.deleted_at IS NULL
+      AND (
+        DATE(o.created_at) = d.stat_date
+        OR DATE(o.completed_at) = d.stat_date
+      )
+    GROUP BY d.stat_date
+    ORDER BY d.stat_date ASC
+  </select>
+
+  <select id="listRepairerStats" resultMap="RepairerStatisticResultMap">
+    SELECT u.id AS repairer_id,
+           u.real_name AS repairer_name,
+           SUM(CASE WHEN o.status IN ('ASSIGNED', 'PROCESSING', 'WAIT_CONFIRM', 'NEED_REASSIGN') THEN 1 ELSE 0 END)
+             AS active_count,
+           SUM(CASE WHEN o.status = 'COMPLETED' THEN 1 ELSE 0 END) AS completed_count,
+           ROUND(AVG(f.score), 2) AS average_score
+    FROM users u
+    LEFT JOIN repair_orders o ON o.repairer_id = u.id
+      AND o.deleted_at IS NULL
+    LEFT JOIN repair_feedbacks f ON f.order_id = o.id
+    WHERE u.role = 'REPAIR'
+      AND u.deleted_at IS NULL
+    GROUP BY u.id, u.real_name
+    ORDER BY completed_count DESC, active_count DESC, u.id ASC
+  </select>
+</mapper>

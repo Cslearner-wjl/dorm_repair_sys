@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorm.repair.mapper.RepairRecordMapper">
+
+  <resultMap id="RepairRecordVOResultMap" type="com.dorm.repair.vo.RepairRecordVO">
+    <id column="id" property="id"/>
+    <result column="operator_name" property="operatorName"/>
+    <result column="action" property="action"/>
+    <result column="content" property="content"/>
+    <result column="created_at" property="createdAt"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.dorm.repair.entity.RepairRecord"
+          useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO repair_records (
+      order_id, operator_id, action, content
+    ) VALUES (
+      #{orderId}, #{operatorId}, #{action}, #{content}
+    )
+  </insert>
+
+  <select id="listByOrderId" resultMap="RepairRecordVOResultMap">
+    SELECT rr.id,
+           u.real_name AS operator_name,
+           rr.action,
+           rr.content,
+           rr.created_at
+    FROM repair_records rr
+    JOIN users u ON u.id = rr.operator_id
+    WHERE rr.order_id = #{orderId}
+    ORDER BY rr.created_at ASC, rr.id ASC
+  </select>
+</mapper>

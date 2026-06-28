@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorm.repair.mapper.RepairOrderMapper">
+
+  <resultMap id="RepairOrderResultMap" type="com.dorm.repair.entity.RepairOrder">
+    <id column="id" property="id"/>
+    <result column="order_no" property="orderNo"/>
+    <result column="student_id" property="studentId"/>
+    <result column="repairer_id" property="repairerId"/>
+    <result column="dorm_building" property="dormBuilding"/>
+    <result column="room_no" property="roomNo"/>
+    <result column="category" property="category"/>
+    <result column="title" property="title"/>
+    <result column="description" property="description"/>
+    <result column="image_urls" property="imageUrls"/>
+    <result column="contact_phone" property="contactPhone"/>
+    <result column="status" property="status"/>
+    <result column="reject_reason" property="rejectReason"/>
+    <result column="assigned_at" property="assignedAt"/>
+    <result column="completed_at" property="completedAt"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <result column="deleted_at" property="deletedAt"/>
+  </resultMap>
+
+  <resultMap id="RepairOrderVOResultMap" type="com.dorm.repair.vo.RepairOrderVO">
+    <id column="id" property="id"/>
+    <result column="order_no" property="orderNo"/>
+    <result column="title" property="title"/>
+    <result column="dorm_building" property="dormBuilding"/>
+    <result column="room_no" property="roomNo"/>
+    <result column="category" property="category"/>
+    <result column="status" property="status"/>
+    <result column="student_name" property="studentName"/>
+    <result column="repairer_name" property="repairerName"/>
+    <result column="created_at" property="createdAt"/>
+  </resultMap>
+
+  <resultMap id="RepairDetailVOResultMap" type="com.dorm.repair.vo.RepairDetailVO" extends="RepairOrderVOResultMap">
+    <result column="description" property="description"/>
+    <result column="image_urls" property="imageUrls"/>
+    <result column="contact_phone" property="contactPhone"/>
+    <result column="reject_reason" property="rejectReason"/>
+  </resultMap>
+
+  <sql id="OrderColumns">
+    id, order_no, student_id, repairer_id, dorm_building, room_no, category, title,
+    description, image_urls, contact_phone, status, reject_reason, assigned_at,
+    completed_at, created_at, updated_at, deleted_at
+  </sql>
+
+  <sql id="OrderVOColumns">
+    o.id, o.order_no, o.title, o.dorm_building, o.room_no, o.category, o.status,
+    o.description, o.image_urls, o.contact_phone, o.reject_reason, o.created_at,
+    s.real_name AS student_name,
+    r.real_name AS repairer_name
+  </sql>
+
+  <sql id="RepairFilter">
+    o.deleted_at IS NULL
+    <if test="studentId != null">
+      AND o.student_id = #{studentId}
+    </if>
+    <if test="repairerId != null">
+      AND o.repairer_id = #{repairerId}
+    </if>
+    <if test="status != null">
+      AND o.status = #{status}
+    </if>
+    <if test="category != null and category != ''">
+      AND o.category = #{category}
+    </if>
+    <if test="keyword != null and keyword != ''">
+      AND (
+        o.order_no LIKE CONCAT('%', #{keyword}, '%')
+        OR o.title LIKE CONCAT('%', #{keyword}, '%')
+        OR o.dorm_building LIKE CONCAT('%', #{keyword}, '%')
+        OR o.room_no LIKE CONCAT('%', #{keyword}, '%')
+        OR s.real_name LIKE CONCAT('%', #{keyword}, '%')
+      )
+    </if>
+  </sql>
+
+  <insert id="insert" parameterType="com.dorm.repair.entity.RepairOrder"
+          useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO repair_orders (
+      order_no, student_id, repairer_id, dorm_building, room_no, category, title,
+      description, image_urls, contact_phone, status
+    ) VALUES (
+      #{orderNo}, #{studentId}, #{repairerId}, #{dormBuilding}, #{roomNo}, #{category}, #{title},
+      #{description}, #{imageUrls}, #{contactPhone}, #{status}
+    )
+  </insert>
+
+  <select id="findById" resultMap="RepairOrderResultMap">
+    SELECT <include refid="OrderColumns"/>
+    FROM repair_orders
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+    LIMIT 1
+  </select>
+
+  <select id="findVOById" resultMap="RepairOrderVOResultMap">
+    SELECT <include refid="OrderVOColumns"/>
+    FROM repair_orders o
+    JOIN users s ON s.id = o.student_id
+    LEFT JOIN users r ON r.id = o.repairer_id
+    WHERE o.id = #{id}
+      AND o.deleted_at IS NULL
+    LIMIT 1
+  </select>
+
+  <select id="findDetailById" resultMap="RepairDetailVOResultMap">
+    SELECT <include refid="OrderVOColumns"/>
+    FROM repair_orders o
+    JOIN users s ON s.id = o.student_id
+    LEFT JOIN users r ON r.id = o.repairer_id
+    WHERE o.id = #{id}
+      AND o.deleted_at IS NULL
+    LIMIT 1
+  </select>
+
+  <select id="countRepairs" resultType="long">
+    SELECT COUNT(*)
+    FROM repair_orders o
+    JOIN users s ON s.id = o.student_id
+    LEFT JOIN users r ON r.id = o.repairer_id
+    WHERE <include refid="RepairFilter"/>
+  </select>
+
+  <select id="listRepairs" resultMap="RepairOrderVOResultMap">
+    SELECT <include refid="OrderVOColumns"/>
+    FROM repair_orders o
+    JOIN users s ON s.id = o.student_id
+    LEFT JOIN users r ON r.id = o.repairer_id
+    WHERE <include refid="RepairFilter"/>
+    ORDER BY o.created_at DESC, o.id DESC
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+
+  <update id="updateBaseInfo" parameterType="com.dorm.repair.entity.RepairOrder">
+    UPDATE repair_orders
+    SET dorm_building = #{dormBuilding},
+        room_no = #{roomNo},
+        category = #{category},
+        title = #{title},
+        description = #{description},
+        image_urls = #{imageUrls},
+        contact_phone = #{contactPhone}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="updateStatus">
+    UPDATE repair_orders
+    SET status = #{status}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="softDelete">
+    UPDATE repair_orders
+    SET deleted_at = NOW()
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="reject">
+    UPDATE repair_orders
+    SET status = #{status},
+        reject_reason = #{rejectReason}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="assign">
+    UPDATE repair_orders
+    SET status = #{status},
+        repairer_id = #{repairerId},
+        assigned_at = NOW()
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="finish">
+    UPDATE repair_orders
+    SET status = #{status},
+        completed_at = NOW()
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+
+  <update id="requestReassign">
+    UPDATE repair_orders
+    SET status = #{status}
+    WHERE id = #{id}
+      AND deleted_at IS NULL
+  </update>
+</mapper>

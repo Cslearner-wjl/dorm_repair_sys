@@ -26,6 +26,8 @@ build/
 coverage/
 .cache/
 .vite/
+target/
+server/uploads/
 
 # Temporary files
 tmp/
