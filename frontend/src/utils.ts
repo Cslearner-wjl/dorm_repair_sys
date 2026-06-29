@@ -1,5 +1,5 @@
 import { REPAIR_STATUS_LABELS } from "./constants";
-import type { RepairOrderVO, RepairStatus, UserRole } from "./types";
+import type { PageResult, RepairOrderVO, RepairStatus, StatisticItemVO, UserRole } from "./types";
 
 export function cn(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -42,9 +42,9 @@ export function statusClass(status: RepairStatus) {
 }
 
 export function roleHome(role: UserRole) {
-  if (role === "ADMIN") return "admin-home";
-  if (role === "REPAIR") return "repairer-tasks";
-  return "student-home";
+  if (role === "ADMIN") return "/admin";
+  if (role === "REPAIR") return "/repairer/tasks";
+  return "/";
 }
 
 export function countByStatus(orders: RepairOrderVO[], status: RepairStatus) {
@@ -57,4 +57,24 @@ export function activeRepairCount(orders: RepairOrderVO[]) {
 
 export function statusLabel(status: RepairStatus) {
   return REPAIR_STATUS_LABELS[status];
+}
+
+export function emptyPage<T>(): PageResult<T> {
+  return { page: 1, pageSize: 10, total: 0, items: [] };
+}
+
+export function chartColor(index: number) {
+  return ["#09568c", "#4f8fd3", "#6fc5d3", "#16a66a", "#f59e0b", "#94a3b8"][index % 6];
+}
+
+export function buildDonut(data: StatisticItemVO[], total: number) {
+  if (!data.length || total <= 0) return "conic-gradient(#dfe3e8 0 100%)";
+  let start = 0;
+  const stops = data.map((item, index) => {
+    const end = start + (item.count / total) * 100;
+    const stop = `${chartColor(index)} ${start}% ${end}%`;
+    start = end;
+    return stop;
+  });
+  return `conic-gradient(${stops.join(", ")})`;
 }

@@ -16,6 +16,7 @@ import com.dorm.repair.service.RepairService;
 import com.dorm.repair.vo.RepairDetailVO;
 import com.dorm.repair.vo.RepairOrderVO;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -133,5 +134,10 @@ public class RepairController {
     @PostMapping("/{id}/feedback")
     public ApiResponse<RepairOrderVO> feedback(@PathVariable Long id, @Valid @RequestBody RepairFeedbackDTO dto) {
         return ApiResponse.success(repairService.feedback(id, dto));
+    }
+
+    @GetMapping("/buildings")
+    public ApiResponse<List<String>> getBuildings() {
+        return ApiResponse.success(repairService.getBuildings());
     }
 }

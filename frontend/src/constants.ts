@@ -41,7 +41,20 @@ export const REPAIR_CATEGORIES = [
   "其他维修",
 ];
 
-export const BUILDINGS = ["松园1栋", "松园2栋", "松园3栋", "竹园4栋", "梅园3栋", "兰园5栋"];
+export const REPAIR_FILTER_CATEGORIES = [
+  ...REPAIR_CATEGORIES,
+  "水电",
+  "门窗",
+  "家具",
+  "网络",
+  "卫生",
+  "空调",
+  "其他",
+];
+
+export const STATUS_FLOW: RepairStatus[] = ["PENDING", "APPROVED", "ASSIGNED", "PROCESSING", "WAIT_CONFIRM", "COMPLETED"];
+
+export const HERO_IMAGE = "/assets/dorm-repair-hero.png";
 
 export const DEMO_ACCOUNTS = [
   { label: "学生演示", username: "student001", password: "123456", role: "STUDENT" as const },

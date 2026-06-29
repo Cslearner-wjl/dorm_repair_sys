@@ -192,6 +192,13 @@
       AND deleted_at IS NULL
   </update>
 
+  <select id="findDistinctBuildings" resultType="string">
+    SELECT DISTINCT dorm_building
+    FROM repair_orders
+    WHERE deleted_at IS NULL
+    ORDER BY dorm_building
+  </select>
+
   <update id="requestReassign">
     UPDATE repair_orders
     SET status = #{status}

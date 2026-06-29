@@ -28,6 +28,7 @@ import com.dorm.repair.vo.RepairDetailVO;
 import com.dorm.repair.vo.RepairOrderVO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -322,6 +323,11 @@ public class RepairServiceImpl extends StubServiceSupport implements RepairServi
         }
         addRecord(id, currentUser.getId(), "FEEDBACK", content);
         return repairOrderMapper.findVOById(id);
+    }
+
+    @Override
+    public List<String> getBuildings() {
+        return repairOrderMapper.findDistinctBuildings();
     }
 
     private PageResult<RepairOrderVO> listByQuery(Long studentId, Long repairerId, RepairQueryDTO query) {

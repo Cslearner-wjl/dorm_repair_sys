@@ -101,6 +101,7 @@ export const repairApi = {
   confirm: (id: number) => unwrap<RepairOrderVO>(apiClient.post(`/repairs/${id}/confirm`)),
   feedback: (id: number, score: number, comment?: string) =>
     unwrap<RepairOrderVO>(apiClient.post(`/repairs/${id}/feedback`, { score, comment })),
+  buildings: () => unwrap<string[]>(apiClient.get("/repairs/buildings")),
 };
 
 export const userApi = {

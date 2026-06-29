@@ -127,3 +127,8 @@ export interface UploadVO {
   url: string;
   size: number;
 }
+
+export interface ToastMessage {
+  type: "success" | "error";
+  message: string;
+}

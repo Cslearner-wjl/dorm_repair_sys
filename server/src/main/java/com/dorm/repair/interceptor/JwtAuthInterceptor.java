@@ -3,6 +3,8 @@ package com.dorm.repair.interceptor;
 import com.dorm.repair.common.BusinessException;
 import com.dorm.repair.common.ErrorCode;
 import com.dorm.repair.common.UserRole;
+import com.dorm.repair.entity.User;
+import com.dorm.repair.mapper.UserMapper;
 import com.dorm.repair.security.CurrentUser;
 import com.dorm.repair.security.RequireRole;
 import com.dorm.repair.security.UserContext;
@@ -19,11 +21,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
     private static final String BEARER_PREFIX = "Bearer ";
+    private static final int STATUS_ENABLED = 1;
 
     private final JwtUtil jwtUtil;
+    private final UserMapper userMapper;
 
-    public JwtAuthInterceptor(JwtUtil jwtUtil) {
+    public JwtAuthInterceptor(JwtUtil jwtUtil, UserMapper userMapper) {
         this.jwtUtil = jwtUtil;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -40,11 +45,16 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         try {
             Claims claims = jwtUtil.parseToken(authorization.substring(BEARER_PREFIX.length()));
             Long userId = claims.get("userId", Number.class).longValue();
-            String username = claims.getSubject();
-            UserRole role = UserRole.valueOf(claims.get("role", String.class));
-            CurrentUser currentUser = new CurrentUser(userId, username, role);
+            User user = userMapper.findById(userId);
+            if (user == null) {
+                throw new BusinessException(ErrorCode.UNAUTHORIZED, "User does not exist");
+            }
+            if (!Integer.valueOf(STATUS_ENABLED).equals(user.getStatus())) {
+                throw new BusinessException(ErrorCode.FORBIDDEN, "Account is disabled");
+            }
+            CurrentUser currentUser = new CurrentUser(user.getId(), user.getUsername(), user.getRole());
             UserContext.set(currentUser);
-            checkRole(handler, role);
+            checkRole(handler, user.getRole());
             return true;
         } catch (BusinessException exception) {
             throw exception;

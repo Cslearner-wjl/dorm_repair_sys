@@ -58,4 +58,6 @@ public interface RepairOrderMapper {
     int finish(@Param("id") Long id, @Param("status") RepairStatus status);
 
     int requestReassign(@Param("id") Long id, @Param("status") RepairStatus status);
+
+    List<String> findDistinctBuildings();
 }

@@ -9,6 +9,7 @@ import com.dorm.repair.dto.RepairQueryDTO;
 import com.dorm.repair.dto.RepairReassignDTO;
 import com.dorm.repair.dto.RepairRejectDTO;
 import com.dorm.repair.dto.RepairUpdateDTO;
+import java.util.List;
 import com.dorm.repair.vo.RepairDetailVO;
 import com.dorm.repair.vo.RepairOrderVO;
 
@@ -45,4 +46,6 @@ public interface RepairService {
     RepairOrderVO confirm(Long id);
 
     RepairOrderVO feedback(Long id, RepairFeedbackDTO dto);
+
+    List<String> getBuildings();
 }

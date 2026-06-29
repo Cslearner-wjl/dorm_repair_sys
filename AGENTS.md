@@ -4,9 +4,24 @@
 
 This repository contains a dormitory repair management system for course delivery.
 
-- `server/`: Spring Boot 3 backend using Java 17, MyBatis, MySQL, JWT auth, and REST controllers.
+### Backend (`server/`)
+- Spring Boot 3 backend using Java 17, MyBatis, MySQL, JWT auth, and REST controllers.
 - `server/src/main/java/com/dorm/repair/`: application code grouped by `controller`, `service`, `service/impl`, `mapper`, `entity`, `dto`, `vo`, `security`, `config`, `common`, and `util`.
 - `server/src/main/resources/mapper/`: MyBatis XML mapper SQL.
+
+### Frontend (`frontend/`)
+- React 19 + TypeScript + Vite SPA, using custom CSS (no UI framework).
+- `frontend/src/App.tsx`: root component with global auth state and view routing (~110 lines after split).
+- `frontend/src/pages/`: 11 page-level components — `AuthScreen`, `StudentHome`, `RepairCreatePage`, `RepairListPage`, `TrackingPage`, `RepairDetailPage`, `AdminHome`, `DispatchPage`, `UserManagementPage`, `ProfilePage`, `AnnouncementsPage`.
+- `frontend/src/components/`: 20 reusable UI components — `AppShell`, `ToastBar`, `Modal` / `TextModal` / `AssignModal` / `FeedbackModal`, `PanelTitle`, `StatCard`, `DataState`, `FilterBar`, `Pagination`, `StatusBadge`, `CategoryPill`, `MiniFlow`, `Timeline`, `InfoItem`, `ActionPanel`, `TrendChart`, `Distribution`, `RepairerList`, `MessageIcon`.
+- `frontend/src/hooks/`: custom hooks — `useAsyncData` (async fetch with loading/error/reload states).
+- `frontend/src/icons.tsx`: category-to-icon mapping (lucide-react icons).
+- `frontend/src/api.ts`: Axios client, token helpers, and all API endpoint wrappers.
+- `frontend/src/types.ts`: shared TypeScript interfaces — `UserVO`, `RepairOrderVO`, `RepairDetailVO`, `RepairFormDTO`, `RepairQueryDTO`, `View`, `ToastMessage`, etc.
+- `frontend/src/constants.ts`: role labels, status labels/options, categories, buildings, demo accounts, status flow, hero image path.
+- `frontend/src/utils.ts`: `cn()`, `formatDateTime()`, `formatFullDateTime()`, `maskPhone()`, `statusClass()`, `statusLabel()`, `roleHome()`, `countByStatus()`, `emptyPage()`, `chartColor()`, `buildDonut()`.
+
+### Database & Docs
 - `sql/`: database scripts. Use `init.sql` first, then `demo-data.sql` when demo accounts are needed.
 - `docs/`: API, deployment, design, and testing documentation.
 
@@ -18,6 +33,15 @@ Run backend commands from `server/`:
 mvn spring-boot:run   # start API server on port 8080
 mvn test              # run Maven/Spring Boot test suite
 mvn package           # build the backend jar
+```
+
+Run frontend commands from `frontend/`:
+
+```powershell
+npm run dev           # start Vite dev server (usually port 5173)
+npm run build         # production build to dist/
+npm run preview       # preview production build
+npx tsc --noEmit      # TypeScript type-check without emitting
 ```
 
 Initialize the database from the repository root:
