@@ -1,123 +1,123 @@
 ## Overview
 
-MongoDB carries a strong dual-mode visual identity — dark deep-teal hero bands with the unmistakable bright MongoDB green ({colors.brand-green}) CTA pill paired with stark white documentation and pricing surfaces. The homepage opens with "One data platform. Unlimited AI potential." headline over a deep navy hero, the green pill sitting at the visual center as the primary CTA. Lower on the page, embedded code mockup cards (terminal-aesthetic) sit on the dark hero band, breaking out into white feature cards below. The pricing page renders a 3-tier comparison (Free / Flex / Dedicated) with a featured tier highlighted in soft mint background and bright green border. The MongoDB University page presents a course catalog grid where each tile carries a colored category tag (orange, purple, green, teal) — these are MongoDB's category-encoding accent colors and are the only place outside the brand green where saturated color appears.
+Notion looks like a well-organized desk in good daylight. The dominant surface is not pure white but a warm, paper-soft off-white — `{colors.canvas-soft}` (#f6f5f4) — that takes the clinical edge off the screen and makes long pages feel like a document rather than an app. Type is set in `NotionInter` (a tuned Inter) in near-black `{colors.ink}` at large, tightly-tracked weights, so headlines read as confident statements with very little letter-spacing slack at display sizes (`{typography.display-1}` pulls −2.125px of tracking at 64px). The whole system whispers in greys and blacks, then says exactly one thing in colour: a single, dependable blue, `{colors.primary}` (#0075de), reserved almost entirely for the primary call-to-action and inline links.
 
-The system uses Euclid Circular A as its display face. The face is contemporary geometric — confident but not overly playful — and pairs naturally with both the developer-tool aesthetic of the database product and the educational positioning of the learning surfaces. Cards use `{rounded.lg}` (12px) corners; buttons use `{rounded.full}` pills universally. The brand-teal palette ({colors.brand-teal-deep}) anchors hero bands, footer, code mockups, and the dark CTA banners.
+Against that quiet chrome, Notion lets a **playful multi-colour sticker palette** carry all of the brand's personality — purple, pink, orange, teal, green and sky-blue appear as small illustrated blocks, app-icon stickers, and category dots scattered through the marketing pages. These colours never structure the layout or paint a CTA; they decorate. The discipline is deliberate: the interface stays monochrome-plus-blue so the content (and the cheerful illustrations) can breathe. The one exception to the bright daylight is the homepage hero, which inverts into a deep indigo "night" band (`{colors.secondary}`) with white type and glowing sticker constellations — a single dark island in an otherwise light document.
+
+Surfaces are defined by hairlines and the faintest layered shadows rather than heavy elevation. Cards round at a friendly 12px (`{rounded.lg}`), the marketing CTAs are fully-pill-shaped (`{rounded.full}`), and utility buttons round at a tighter 8px (`{rounded.md}`). Nothing is loud; the brand's character comes from restraint plus one well-placed splash of joy.
 
 **Key Characteristics:**
-- Deep navy/teal hero bands ({colors.brand-teal-deep}) with bright MongoDB green ({colors.brand-green}) CTA pills
-- Stark white pricing/documentation surfaces with colored category tags for course tiles (purple, orange, green, teal)
-- Euclid Circular A across every UI surface
-- Pill-shaped buttons ({rounded.full}) and 12px-rounded cards
-- 3-tier pricing comparison (Free / Flex / Dedicated) with featured-mint highlight tier
-- Code mockup cards with terminal-aesthetic dark canvas
+- Warm paper-soft canvas `{colors.canvas-soft}` over pure white, never clinical
+- Near-black `{colors.ink}` `NotionInter` type with tight negative tracking at display sizes (`{typography.display-1}`)
+- Exactly one structural accent — Notion blue `{colors.primary}` — reserved for CTAs and links
+- A decorative-only multi-colour sticker palette (`{colors.accent-purple}`, `{colors.accent-pink}`, `{colors.accent-orange}`, `{colors.accent-teal}`, `{colors.accent-green}`, `{colors.accent-sky}`) that adds personality without ever painting structure
+- Pill-shaped marketing CTAs (`{rounded.full}`) contrasted with 8px utility buttons (`{rounded.md}`)
+- Elevation by hairline + barely-there layered shadow, not heavy drop-shadows
+- A single dark indigo hero "night" band (`{colors.secondary}`) inverting the otherwise daylight page rhythm
 
 ## Colors
 
-> Source pages: mongodb.com/ (homepage), /products/platform/atlas-database (Atlas product), /products/self-managed/community-edition, learn.mongodb.com/ (MongoDB University), /solutions/use-cases/artificial-intelligence (AI), /pricing (3-tier comparison). Token coverage was identical across all six pages.
+> Source pages analysed: the Notion home page plus Pricing, Enterprise, Product (AI), Product (Agents), and Startups. Every secondary page resolved to the same core palette — Notion runs one tightly-scoped system across the marketing site.
 
 ### Brand & Accent
-- **MongoDB Green** ({colors.brand-green}): The brand's most recognizable signal — bright pill-CTA color
-- **Green Dark** ({colors.brand-green-dark}): Inline link color, secondary green
-- **Green Mid** ({colors.brand-green-mid}): Mid-spectrum green for atmospheric tints
-- **Green Soft** ({colors.brand-green-soft}): Pale-mint background tint for success badges and featured pricing tier
-- **Brand Teal Deep** ({colors.brand-teal-deep}): Deep navy-teal for hero bands, footer
-- **Brand Teal** ({colors.brand-teal}): Mid-spectrum teal
-- **Brand Teal Mid** ({colors.brand-teal-mid}): Lighter teal for hero platform cards
+- **Notion Blue** (`{colors.primary}` — #0075de): the single structural accent. Primary CTA fill ("Get Notion free"), inline link colour, active-tab and focus signal. This is the only colour that ever paints an action.
+- **Pressed Blue** (`{colors.primary-active}` — #005bab): the darker press state of the primary CTA.
+- **Deep Indigo** (`{colors.secondary}` — #213183): the dark hero "night" band background and its sticker-constellation field; a deep brand-blue used for full-bleed inverted sections.
 
-### Category Accent (Course Tags)
-- **Accent Purple** ({colors.accent-purple}): Course tag for "Database & Security"
-- **Accent Orange** ({colors.accent-orange}): Course tag for "Search"
-- **Accent Pink** ({colors.accent-pink}): Course tag variant
-- **Accent Blue** ({colors.accent-blue}): Course tag variant for atlas/cloud topics
+The remaining colours form Notion's **decorative sticker palette** — they appear only as illustrated blocks, app stickers and category dots, never as CTAs or structural fills:
+- **Sticker Sky** (`{colors.accent-sky}` — #62aef0)
+- **Sticker Purple** (`{colors.accent-purple}` — #d6b6f6) / **Deep Purple** (`{colors.accent-purple-deep}` — #391c57)
+- **Sticker Pink** (`{colors.accent-pink}` — #ff64c8)
+- **Sticker Orange** (`{colors.accent-orange}` — #dd5b00) / **Deep Orange** (`{colors.accent-orange-deep}` — #793400)
+- **Sticker Teal** (`{colors.accent-teal}` — #2a9d99)
+- **Sticker Green** (`{colors.accent-green}` — #1aae39)
+- **Sticker Brown** (`{colors.accent-brown}` — #523410)
 
 ### Surface
-- **Canvas White** ({colors.canvas}): Page background and primary card surface
-- **Canvas Dark** ({colors.canvas-dark}): Code-block backgrounds, dark mockup canvas
-- **Surface** ({colors.surface}): Subtle section backgrounds, search-pill rest
-- **Surface Soft** ({colors.surface-soft}): Quieter section divisions
-- **Surface Feature** ({colors.surface-feature}): Pale mint background for featured pricing tier
-- **Hairline** ({colors.hairline}): 1px borders and primary dividers
-- **Hairline Soft** ({colors.hairline-soft}): Quieter dividers
-- **Hairline Strong** ({colors.hairline-strong}): Stronger 1px border for inputs
-- **Hairline Dark** ({colors.hairline-dark}): Border on dark surfaces
+- **White** (`{colors.canvas}` / `{colors.surface}` — #ffffff): card and panel surfaces, nav bar, form fields.
+- **Warm Paper** (`{colors.canvas-soft}` — #f6f5f4): the signature page canvas and the footer band — a warm off-white that gives the whole site its document-like calm.
+- **Hairline** (`{colors.hairline}` — #e6e6e6): 1px card borders and dividers, a black-at-10%-on-white blend kept solid for token reuse.
 
 ### Text
-- **Ink** ({colors.ink}): Primary headlines and body text (deep navy-teal)
-- **Charcoal** ({colors.charcoal}): Body emphasis
-- **Slate** ({colors.slate}): Secondary text
-- **Steel** ({colors.steel}): Tertiary text, captions
-- **Stone** ({colors.stone}): Muted labels
-- **Muted** ({colors.muted}): Disabled, placeholders
-- **On Dark** ({colors.on-dark}): White text on dark surfaces
-- **On Dark Muted** ({colors.on-dark-muted}): Reduced-opacity white
+- **Ink** (`{colors.ink}` — #000000): primary headings and body text (rendered at ~95% alpha for a soft true-black).
+- **Warm Charcoal** (`{colors.ink-secondary}` — #31302e): secondary body copy and footer text.
+- **Stone** (`{colors.ink-muted}` — #615d59): supporting / muted copy.
+- **Ash** (`{colors.ink-faint}` — #a39e98): captions, metadata, placeholder text.
 
 ### Semantic
-- **Warning Background** ({colors.semantic-warning-bg}): Pale yellow callout bg
-- **Warning Text** ({colors.semantic-warning-text}): Warning state copy color
+Notion's marketing surfaces do not expose a dedicated error/success palette in the system chrome — status is carried by the sticker palette (e.g. `{colors.accent-green}` for affirmative ticks) rather than a separate semantic ramp.
 
 ## Typography
 
 ### Font Family
-**Euclid Circular A** (primary): MongoDB's geometric sans-serif. Fallbacks: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif.
-**Source Code Pro** (code): Monospace for code mockups. Fallbacks: 'SF Mono', Menlo, Consolas, monospace.
+The entire system is set in **`NotionInter`** — Notion's tuned cut of Inter — with a fallback stack of `Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial`. A single family carries everything from 64px display headlines to 12px eyebrows; there is no serif, no monospace display face. OpenType `lnum` (lining numerals) and `locl` features are enabled on body and heading roles.
 
 ### Hierarchy
 
 | Token | Size | Weight | Line Height | Letter Spacing | Use |
 |---|---|---|---|---|---|
-| `{typography.hero-display}` | 72px | 500 | 1.10 | -1.5px | Hero ("One data platform") |
-| `{typography.display-lg}` | 56px | 500 | 1.15 | -1px | Major section openers |
-| `{typography.heading-1}` | 48px | 500 | 1.20 | -0.5px | Page-level headlines |
-| `{typography.heading-2}` | 36px | 500 | 1.25 | -0.5px | Subsection headlines |
-| `{typography.heading-3}` | 28px | 500 | 1.30 | 0 | Card titles |
-| `{typography.heading-4}` | 22px | 500 | 1.35 | 0 | Feature tile titles |
-| `{typography.heading-5}` | 18px | 600 | 1.40 | 0 | Smaller card titles, FAQ questions |
-| `{typography.subtitle}` | 18px | 400 | 1.50 | 0 | Hero subtitle, lead body |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Primary body text |
-| `{typography.body-sm}` | 14px | 400 | 1.50 | 0 | Secondary body, table cells |
-| `{typography.body-sm-medium}` | 14px | 500 | 1.50 | 0 | Active sidebar, button labels |
-| `{typography.caption-bold}` | 13px | 600 | 1.40 | 0 | Badge labels |
-| `{typography.micro-uppercase}` | 11px | 600 | 1.40 | 1px | Section eyebrows, course category tags |
-| `{typography.button-md}` | 14px | 600 | 1.30 | 0 | Pill button labels |
-| `{typography.code-md}` | 14px | 400 | 1.55 | 0 | Code mockups |
+| `{typography.display-1}` | 64px | 700 | 1.0 | −2.125px | Hero headline ("Meet the night shift") |
+| `{typography.display-2}` | 54px | 700 | 1.04 | −1.875px | Large section headlines |
+| `{typography.heading-1}` | 40px | 700 | 1.1 | −1px | Section headlines ("Plans and features") |
+| `{typography.heading-2}` | 26px | 700 | 1.23 | −0.625px | Sub-section headings |
+| `{typography.heading-3}` | 22px | 700 | 1.27 | −0.25px | Card titles |
+| `{typography.title}` | 20px | 600 | 1.4 | −0.125px | Feature titles, callouts |
+| `{typography.body-md}` | 16px | 400 | 1.5 | 0 | Default body copy |
+| `{typography.body-sm}` | 15px | 400 | 1.33 | 0 | Dense body, table rows, nav |
+| `{typography.button}` | 16px | 500 | 1.5 | 0 | Button labels |
+| `{typography.caption}` | 14px | 400 | 1.43 | 0 | Captions, footnotes |
+| `{typography.eyebrow}` | 12px | 600 | 1.33 | +0.125px | Pill badges, small labels |
 
 ### Principles
-- Tight hero leading (1.10) on 72px display
-- Negative letter-spacing on display sizes (-1.5px to -0.5px)
-- 600 weight reserved for buttons and small emphasis (FAQ headings, badges)
-- Generous body leading (1.55) for technical documentation readability
+Notion's type voice is **tight, heavy, and quiet-confident**. Headlines lean on weight 700 and aggressive negative tracking (more negative the larger the size) so display copy feels set, not stretched. Body copy stays at a comfortable 1.5 line-height for document readability. The contrast between a heavy 700 headline and a calm 400 body is the primary expressive lever — there is no decorative typography, only a clear hierarchy.
+
+### Note on Font Substitutes
+`NotionInter` is a proprietary tuning of the open-source **Inter** family — substitute Inter directly. To approximate Notion's display tightness, apply the negative letter-spacing values in the table above explicitly (Inter at default tracking will read looser than `NotionInter`).
 
 ## Layout
 
 ### Spacing System
-- **Base unit**: 4px (8px primary increment)
-- **Tokens**: `{spacing.xxs}` (4px) through `{spacing.hero}` (120px)
-- **Section rhythm**: Marketing pages use `{spacing.section-lg}` (96px); pricing tightens to `{spacing.section}` (64px)
+- **Base unit**: 8px.
+- **Tokens (front matter)**: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 28px · `{spacing.xxl}` 32px.
+- Card interior padding lands around `{spacing.lg}` (24px); utility buttons use a tight 4px/14px; form fields pad at `{spacing.xxs}`-scale 6px. Section gaps stack the larger steps.
 
 ### Grid & Container
-- 1280px max-width with 32px gutters
-- Pricing: 3-tier card row, dense feature comparison table below
-- Learn catalog: 3-up course tile grid, 4-up certification grid
-- AI use cases: 2-column hero with atmospheric illustration
+Content is centred in a wide max-width column (~1080–1300px on desktop per the extracted breakpoints) with generous outer gutters. Feature sections alternate between full-width text blocks and 2-up / 3-up card grids; the pricing page widens to a 4-column plan table. The dark hero spans full-bleed edge to edge while body sections respect the centred container.
 
 ### Whitespace Philosophy
-Marketing surfaces give content generous breathing room — `{spacing.hero}` (120px) hero padding for deep teal bands. Pricing/learn surfaces tighten dramatically.
+Whitespace is the primary grouping device. Sections are separated by large vertical gaps rather than rules, and cards sit on the warm canvas with quiet hairlines instead of heavy frames. The effect is document-like: airy, scannable, and never crowded.
+
+### Responsive Strategy
+
+#### Breakpoints
+| Name | Width | Key Changes |
+|---|---|---|
+| Wide | 1440px+ | Full multi-column grids, widest container |
+| Desktop | 1080–1300px | Standard centred container, 3-up card grids |
+| Tablet | 768–840px | Grids collapse to 2-up, nav begins condensing |
+| Mobile | ≤600px | Single-column stacks, hamburger nav, full-width CTAs |
+
+#### Touch Targets
+Pill CTAs (`button-primary`, `button-secondary`) and utility buttons (`button-utility`) carry comfortable tap padding; aim for a 44×44px minimum hit area on mobile by preserving vertical padding even as labels shrink.
+
+#### Collapsing Strategy
+The top nav condenses to a hamburger below the tablet breakpoint; multi-column card grids collapse to a single stacked column; the pricing plan table reflows from 4 side-by-side columns into stacked plan cards. Section padding tightens but the warm-canvas rhythm is preserved.
+
+#### Image Behavior
+Product screenshots and illustration tiles sit inside rounded `{rounded.lg}` frames and scale fluidly within their grid cell. Sticker illustrations are small fixed-scale decorative assets that re-flow but do not crop.
 
 ## Elevation & Depth
 
 | Level | Treatment | Use |
 |---|---|---|
-| 0 (flat) | No shadow; `{colors.hairline}` border | Default cards, table rows |
-| 1 (subtle) | `rgba(0, 30, 43, 0.04) 0px 1px 2px 0px` | Hover-elevated tiles |
-| 2 (card) | `rgba(0, 30, 43, 0.08) 0px 4px 12px 0px` | Feature cards |
-| 3 (mockup) | `rgba(0, 30, 43, 0.12) 0px 12px 24px -4px` | Code mockup over hero |
-| 4 (modal) | `rgba(0, 30, 43, 0.16) 0px 16px 48px -8px` | Modals, dropdowns |
+| 0 — Flat | Hairline border `{colors.hairline}`, no shadow | Default cards on the warm canvas |
+| 1 — Soft | Layered micro-shadow: `rgba(0,0,0,0.01) 0 0.175px 1.041px`, `0.02 0 0.8px 2.925px`, `0.027 0 2.025px 7.847px`, `0.04 0 4px 18px` | Raised feature cards, floating buttons |
+| 2 — Elevated | Deeper 5-stop stack ending in `rgba(0,0,0,0.05) 0 23px 52px` | Modals, popovers, the elevated white pill on the dark hero |
+
+Notion's elevation philosophy is **barely-there**: shadows are built from many near-transparent layers so surfaces feel gently lifted off the paper rather than dramatically dropped. Most cards rely on a hairline alone.
 
 ### Decorative Depth
-- Dark teal hero bands carry atmospheric gradient depth
-- Code mockup cards on hero use canvas-dark surface with terminal aesthetic
-- Pale-mint pricing-feature tier uses brand-tinted shadow
+The brand's real depth cue is **illustration**, not shadow. The dark indigo hero (`{colors.secondary}`) uses glowing sticker stickers and a starfield to create a sense of a lit night scene, and feature sections layer small colourful app-icon stickers over plain surfaces to add playful dimensionality. Colour-blocked illustration tiles (purple, pink, orange, teal headers on otherwise-white cards) provide visual rhythm.
 
 ## Shapes
 
@@ -125,239 +125,158 @@ Marketing surfaces give content generous breathing room — `{spacing.hero}` (12
 
 | Token | Value | Use |
 |---|---|---|
-| `{rounded.xs}` | 4px | Course category tags |
-| `{rounded.sm}` | 6px | Type badges, code chips |
-| `{rounded.md}` | 8px | Inputs, search-pill, code blocks |
-| `{rounded.lg}` | 12px | Cards, pricing tiers, course tiles |
-| `{rounded.xl}` | 16px | Larger feature panels |
-| `{rounded.xxl}` | 24px | Featured product showcases |
-| `{rounded.full}` | 9999px | All buttons, status badges |
+| `{rounded.xs}` | 4px | Form fields, small tags, inline chips |
+| `{rounded.sm}` | 5px | Menu items, list rows, status pills |
+| `{rounded.md}` | 8px | Utility / nav buttons, smaller cards |
+| `{rounded.lg}` | 12px | Feature cards, illustration frames, content tiles |
+| `{rounded.xl}` | 16px | Large containers, image wells |
+| `{rounded.full}` | 9999px | Marketing pill CTAs, badges, circular icon buttons |
 
 ### Photography Geometry
-- Hero illustrations sit on full-bleed dark backgrounds
-- Course tile thumbnails use `{rounded.lg}` corners
-- Customer logos wall: wordmarks at consistent 60–80px height
+Product screenshots are framed in rounded `{rounded.lg}` / `{rounded.xl}` wells, typically full-bleed within their container with a hairline edge. Illustration tiles use colour-blocked header bands above white card bodies. Avatars and app-icon stickers are small, sometimes fully circular (`{rounded.full}`). There is no heavy art-direction crop — images scale within their rounded frame.
 
 ## Components
 
-> Per the no-hover policy, hover states are NOT documented. Default and pressed/active states only.
-
-### Buttons
-
-**`button-primary`** — Bright MongoDB green pill primary CTA, the dominant action.
-- Background `{colors.brand-green}`, text `{colors.on-primary}` (deep navy), typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
-- Pressed state `button-primary-pressed` deepens to `{colors.primary-pressed}`.
-- Disabled state `button-primary-disabled` uses `{colors.hairline}` background.
-
-**`button-secondary`** — Outlined pill for secondary actions.
-- Background transparent, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
-
-**`button-on-dark`** — Bright green pill on dark hero bands.
-- Background `{colors.brand-green}`, text `{colors.on-primary}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
-
-**`button-secondary-on-dark`** — Outlined pill on dark backgrounds.
-- Background transparent, text `{colors.on-dark}`, border `1px solid {colors.hairline-dark}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
-
-**`button-ghost`** — Quieter rectangular ghost button.
-- Background transparent, text `{colors.ink}`, typography `{typography.button-md}`, padding `8px 12px`, rounded `{rounded.md}`.
-
-**`button-link`** — Inline green text link.
-- Background transparent, text `{colors.brand-green-dark}`, typography `{typography.body-sm-medium}`, padding `0`.
-
-### Cards & Containers
-
-**`card-base`** — Standard content card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-
-**`card-feature`** — Feature card with larger padding.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`card-product-deploy`** — Product deployment card ("MongoDB Atlas / Community").
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`card-feature-dark`** — Dark teal feature card on hero band.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`.
-
-**`card-course`** — MongoDB University course tile.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-- Top: colored category tag. Below: title `{typography.heading-5}`, description `{typography.body-sm}`, "Get Started →" link.
-
-**`card-cert`** — Certification card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-
-**`pricing-card`** — Standard pricing tier card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`pricing-card-featured`** — Featured pricing tier (Flex tier, mint background + green border).
-- Background `{colors.surface-feature}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `2px solid {colors.brand-green}`.
-
-### Inputs & Forms
-
-**`text-input`** — Standard text field.
-- Background `{colors.canvas}`, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, rounded `{rounded.md}`, padding `{spacing.sm} {spacing.md}`, height 44px.
-
-**`text-input-focused`** — Activated state.
-- Border switches to `2px solid {colors.brand-green-dark}`.
-
-**`search-pill`** — Standard 44px search bar.
-- Background `{colors.surface}`, text `{colors.steel}`, typography `{typography.body-md}`, rounded `{rounded.md}`, height 44px, border `1px solid {colors.hairline-strong}`.
-
-**`search-pill-large`** — Large 56px search bar (top of MongoDB University catalog).
-- Background `{colors.canvas}`, text `{colors.steel}`, typography `{typography.body-md}`, rounded `{rounded.md}`, height 56px, border `1px solid {colors.hairline-strong}`.
-
-### Tabs
-
-**`pill-tab`** + **`pill-tab-active`** — Pill-style tab nav (top of pricing: "MongoDB Atlas / Enterprise Advanced").
-- Inactive: text `{colors.steel}`, border `1px solid {colors.hairline}`, padding `{spacing.xs} {spacing.md}`, rounded `{rounded.full}`.
-- Active: background `{colors.ink}`, text `{colors.on-dark}`.
-
-**`segmented-tab`** + **`segmented-tab-active`** — Underline-style tab navigation.
-- Inactive: text `{colors.steel}`, no border. Active: text `{colors.brand-green-dark}`, 2px bottom border in `{colors.brand-green-dark}`.
-
-### Badges & Status
-
-**`badge-green`** — Bright green badge for new product highlights.
-- Background `{colors.brand-green}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-green-soft`** — Pale-mint pill for success/free indicators.
-- Background `{colors.brand-green-soft}`, text `{colors.brand-green-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-purple`** — Purple course category tag.
-- Background `{colors.accent-purple}`, text `{colors.on-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-orange`** — Orange course category tag.
-- Background `{colors.accent-orange}`, text `{colors.on-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-popular`** — "Most Popular" tier indicator (dark teal pill with green text).
-- Background `{colors.brand-teal-deep}`, text `{colors.brand-green}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`promo-banner`** — Dark teal sticky promo strip ABOVE the top nav.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, typography `{typography.body-sm-medium}`, padding `{spacing.sm} {spacing.md}`.
-
-### Code
-
-**`code-block`** — Code container.
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, typography `{typography.code-md}`, rounded `{rounded.md}`, padding `{spacing.md}`.
-
-**`code-mockup-card`** — Embedded code mockup on hero band.
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.lg}`. Carries terminal-aesthetic code snippet.
-
-### Tables
-
-**`comparison-table`** — Pricing feature comparison table.
-- Background `{colors.canvas}`, text `{colors.ink}`, typography `{typography.body-sm}`, rounded `{rounded.md}`, border `1px solid {colors.hairline}`.
-
-**`comparison-row`** — Individual feature row.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.lg}`, bottom border `1px solid {colors.hairline-soft}`.
-
-### Documentation Components
-
-**`service-tile`** — Tile in "Customize your deployment" 6-up grid.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-
-**`why-card`** — "Loved by builders" feature card.
-- Background `{colors.surface}`, rounded `{rounded.lg}`, padding `{spacing.xl}`.
-
-**`customer-testimonial-card`** — Customer quote card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`logo-wall-item`** — Customer logo wordmark cell.
-- Background transparent, text `{colors.steel}`, typography `{typography.body-md-medium}`, padding `{spacing.lg}`.
-
-**`faq-accordion-item`** — FAQ panel.
-- Background `{colors.canvas}`, rounded `{rounded.md}`, padding `{spacing.xl}`, bottom border `1px solid {colors.hairline}`.
+> **No hover states documented.** Every spec below documents Default and Active/Pressed states only. Variants live as separate `components:` front-matter entries and are described in their own sub-blocks.
 
 ### Navigation
 
-**Top Navigation (Marketing)** — Sticky white bar.
-- Background `{colors.canvas}`, height ~64px, bottom border `1px solid {colors.hairline}`.
-- Left: MongoDB leaf logo + "Solutions / Resources / Company / Pricing" links.
-- Right: "Sign In" link + bright-green pill "Try Free" CTA.
+**`nav-bar`** — Top navigation
+- White surface `{colors.canvas}`, `{colors.ink}` link text at `{typography.body-sm}`, padding `{spacing.md}`. Sits as a slim sticky bar; left wordmark, centre product/solutions menu links, right "Log in" text link plus a `button-utility` "Get Notion free" CTA. Condenses to a hamburger below the tablet breakpoint.
+
+### Buttons
+
+**`button-primary`** — Primary CTA ("Get Notion free")
+- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button}`, fully pill-shaped `{rounded.full}`. The single blue action on any page.
+- Pressed state lives in `button-primary-pressed` (background `{colors.primary-active}`); marketing buttons also apply a brief `scale(0.9)` press transform.
+
+**`button-primary-pressed`**
+- Background `{colors.primary-active}`, text `{colors.on-primary}` — the depressed state of the primary CTA.
+
+**`button-secondary`** — Secondary CTA ("Request a demo")
+- White surface `{colors.surface}`, text `{colors.ink}`, type `{typography.button}`, pill `{rounded.full}`, carried by the soft Level-1 shadow. Pairs beside `button-primary` in the hero.
+
+**`button-utility`** — Nav / plan-select button
+- White surface `{colors.surface}`, text `{colors.ink}`, type `{typography.button}`, tighter `{rounded.md}` (8px), padding `4px 14px`, 1px `{colors.hairline}` border. Used for the nav CTA and pricing plan-select buttons where the marketing pill would be too large.
+
+**`button-icon-circular`** — Carousel / media control
+- Circular `{rounded.full}` control with a translucent `rgba(0,0,0,0.05)` fill and `{colors.on-primary}` glyph, used for slide and play/pause controls; applies a `scale(0.9)` press transform.
+
+### Cards & Containers
+
+**`feature-card`** — Content / feature card
+- White surface `{colors.surface}`, `{colors.ink}` text, `{typography.body-md}`, rounded `{rounded.lg}` (12px), padding `{spacing.lg}` (24px). The workhorse marketing card; often topped by a colour-blocked illustration band from the sticker palette. Default elevation is flat (hairline only).
+
+**`feature-card-elevated`** — Raised feature card
+- Same chrome as `feature-card` with the soft Level-1 layered shadow for cards that float above the canvas (testimonials, floating product panels).
+
+**`pricing-plan-card`** — Pricing plan column
+- White surface `{colors.surface}`, `{colors.ink}` text, `{typography.body-sm}`, rounded `{rounded.md}` (8px), padding `{spacing.lg}`. A bordered column listing a plan's price and feature checklist, with a `button-utility` select action.
+
+**`pricing-plan-card-featured`** — Highlighted plan column
+- Warm `{colors.canvas-soft}` fill to lift the recommended tier off the white siblings, same `{rounded.md}` shape and padding. Distinguished by surface tint rather than a coloured border.
+
+### Inputs & Forms
+
+**`text-input`** — Text / number field
+- White surface `{colors.surface}`, `{colors.ink}` text, `{typography.body-sm}`, 1px `rgb(221,221,221)` border, rounded `{rounded.xs}` (4px), padding `6px`. Square-ish corners deliberately tighter than the pill CTAs. Focus adds the soft Level-1 shadow.
 
 ### Signature Components
 
-**`hero-band-dark`** — Deep teal hero band with embedded code mockup.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, padding `{spacing.hero}`.
-- Layout: centered headline `{typography.hero-display}`, subtitle, button row, `code-mockup-card` below.
+**`hero-band`** — Dark "night" hero
+- Full-bleed deep indigo `{colors.secondary}` band carrying `{typography.display-1}` white headline, sticker-constellation field, and a `button-primary` + `button-secondary` CTA pair. The single inverted dark island in an otherwise daylight page.
 
-**`hero-platform-card`** — Lighter-teal platform showcase card on dark hero.
-- Background `{colors.brand-teal-mid}`, text `{colors.on-dark}`, rounded `{rounded.xl}`, padding `{spacing.xxl}`.
+**`badge-pill`** — Eyebrow / category pill
+- White surface `{colors.surface}`, `{colors.primary}` text, `{typography.eyebrow}` (12px / 600), fully pill `{rounded.full}`, padding `4px 8px`. Small labels such as the pricing "Essential for staying organized" eyebrow and category tags.
 
-**`cta-banner-dark`** — Dark CTA banner at the bottom of feature pages.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.section}`.
+**`footer`** — Site footer
+- Warm `{colors.canvas-soft}` band, `{colors.ink-secondary}` link text at `{typography.caption}`, padding `{spacing.xxl}`. Multi-column link directory closing every page.
 
-**`footer-region`** — Dark teal multi-column footer.
-- Background `{colors.brand-teal-deep}`, padding `{spacing.section} {spacing.xxl}`.
-- 6-column link grid.
-- Section headings in `{typography.body-sm-medium}` `{colors.on-dark}`.
+### Examples (illustrative)
 
-**`footer-link`** — Individual footer link.
-- Background transparent, text `{colors.on-dark-muted}`, typography `{typography.body-sm}`, padding `{spacing.xxs} 0`.
+> Kit-mirror demonstration surfaces. Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently.
+
+**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
+- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
+
+**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
+- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
+
+**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
+- Properties: `backgroundColor`, `rounded`, `padding`
+
+**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
+- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
+
+**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
+- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
+
+**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
+- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
+
+**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
+- Properties: `backgroundColor`, `rounded`, `padding`
+
+**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
+- Properties: `backgroundColor`, `rounded`, `padding`
+
+**`ex-empty-state-card`** — Empty-state illustration frame.
+- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
+
+**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
+- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
+
 
 ## Do's and Don'ts
 
 ### Do
-- Use `{colors.brand-green}` (bright MongoDB green) for primary CTAs everywhere
-- Pair dark-teal hero bands with bright green CTA pills
-- Apply `{rounded.full}` to every button, every status badge
-- Apply `{rounded.lg}` (12px) to cards consistently
-- Use category accent colors (purple, orange, green, teal) ONLY for course tags
-- Maintain Euclid Circular A across every UI surface
-- Use code mockup cards with terminal-aesthetic content for product showcases
+- Reserve `{colors.primary}` for the primary action, inline links, and the active/focus signal — nothing decorative.
+- Keep the page on the warm `{colors.canvas-soft}` canvas; use pure white `{colors.surface}` for cards and fields to create gentle figure/ground.
+- Let the sticker palette (`{colors.accent-pink}`, `{colors.accent-teal}`, `{colors.accent-orange}`, …) live only in illustrations, icon tiles and category dots.
+- Set headlines in heavy `{typography.display-1}`/`{typography.heading-1}` with their negative tracking applied explicitly.
+- Use pill `{rounded.full}` for marketing CTAs and tighter `{rounded.md}` for nav/utility buttons — the contrast is intentional.
+- Define surfaces with `{colors.hairline}` and the barely-there Level-1 shadow rather than heavy drop-shadows.
+- Reserve the deep indigo `{colors.secondary}` "night" treatment for a single hero moment, not repeated bands.
 
 ### Don't
-- Don't use the bright green for body text or large surfaces
-- Don't introduce additional accent colors beyond the brand green and category-encoding palette
-- Don't soften corners on buttons; the pill is a brand signature
-- Don't replace deep teal hero bands with white hero bands
-- Don't apply heavy shadows on flat documentation cards; reserve elevation for code mockups
-- Don't use Source Code Pro for prose
+- Don't paint a CTA or structural fill in any sticker-palette colour — those are decoration only.
+- Don't introduce a second structural accent alongside `{colors.primary}`.
+- Don't put pill `{rounded.full}` radii on form fields — inputs stay tight at `{rounded.xs}` (4px).
+- Don't drop heavy shadows; Notion's elevation is many near-transparent layers, never a hard cast.
+- Don't set body copy in a heavy weight — keep 400 for readability and let weight 700 belong to headlines.
+- Don't place type on pure clinical white for full pages; the warm `{colors.canvas-soft}` is core to the brand calm.
 
-## Responsive Behavior
+本项目要求：
 
-### Breakpoints
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile (small) | < 480px | Single column. Hero 36px. Pricing 1-up. Course catalog 1-up. |
-| Mobile (large) | 480 – 767px | Course tiles 2-up. Hero 48px. |
-| Tablet | 768 – 1023px | 2-column feature grids. Hero 56px. |
-| Desktop | 1024 – 1279px | 3-tier pricing card row. 3-up course catalog. Hero 64px. |
-| Wide Desktop | ≥ 1280px | Full 72px hero presentation. |
+# 整体视觉风格
 
-### Touch Targets
-- Pill buttons render at 40–44px effective height
-- Form inputs render at 44px height
-- Search pill (large) renders at 56px
-- Pill tabs ~32px → 44px on mobile
+参考我提供的最新设计图，整体风格为：
 
-### Collapsing Strategy
-- **Promo banner** stays full-width; truncates at < 480px
-- **Top nav** below 1024px collapses to hamburger
-- **Hero band**: code mockup card moves below text on mobile
-- **Pricing tiers**: 3-column → 2-column tablet → 1-column mobile
-- **Course catalog**: 3-up → 2-up tablet → 1-up mobile
-- **Hero typography**: 72px → 56px → 48px → 36px
-- **Footer**: 6-column desktop → 3-column tablet → accordion mobile
+- 顶部导航栏，不要侧边栏。
+- 页面以浅色、干净、柔和、现代化为主。
+- 使用类似 Notion / 轻拟物 / 校园管理后台风格。
+- 卡片圆角、浅阴影、细边框、充足留白。
+- 不要做成传统 Element Plus 默认后台样式。
+- 不要大面积高饱和蓝色，只把蓝色用于主按钮、选中状态、重点数据和链接。
+- 页面要有校园宿舍、维修工具、水滴、齿轮、公告栏等轻量插画元素，可以用 icon、emoji、SVG、CSS 图形或占位插画实现。
+- 整体要像一套真实可交付的课程项目，而不是模板拼接。
 
-### Image Behavior
-- Atmospheric AI imagery uses 16:9 ratio with full-bleed scaling
-- Code mockup card content remains readable across breakpoints
-- Customer logo wall: wordmarks at consistent 60–80px height
+# 主色卡
 
-## Iteration Guide
+以我给出的色卡为核心：
 
-1. Focus on ONE component at a time
-2. Reference component names and tokens directly
-3. Run `npx @google/design.md lint DESIGN.md` after edits
-4. Add new variants as separate `components:` entries
-5. Default to `{typography.body-md}` for body
-6. Keep `{colors.brand-green}` as the primary CTA across all surfaces
-7. Pill-shaped buttons (`{rounded.full}`) always
-8. Dark-teal hero bands frame primary CTAs
-
-## Known Gaps
-
-- Specific dark-mode token values for canvas/surface beyond hero bands not surfaced
-- Animation/transition timings not extracted; recommend 150–200ms ease
-- Form validation success state not explicitly captured
-- Course-tile category color mappings are observation-based
+```css
+:root {
+  --color-primary: #09568c;      /* 主蓝色：按钮、选中态、链接、重点数据 */
+  --color-primary-dark: #074775; /* 按压态、深色强调 */
+  --color-gray: #a1a8ae;         /* 辅助灰：图标、说明文字、弱状态 */
+  --color-bg: #eaebef;           /* 页面背景：浅灰蓝 */
+  --color-surface: #ffffff;      /* 卡片、表单、导航栏 */
+  --color-border: #dfe3e8;       /* 细边框 */
+  --color-text: #0f172a;         /* 主文字 */
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-success: #16a66a;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+}

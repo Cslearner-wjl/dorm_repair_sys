@@ -1,0 +1,1 @@
+{"code":200,"message":"success","data":{"totalOrders":2,"pendingOrders":0,"processingOrders":0,"completedOrders":2,"averageScore":4.5,"statusStats":[{"name":"COMPLETED","count":2}],"categoryStats":[{"name":"WATER","count":2}],"repairerStats":[{"repairerId":3,"repairerName":"维修员演示账号","activeCount":0,"completedCount":2,"averageScore":4.5}]}}

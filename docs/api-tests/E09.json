@@ -1,0 +1,10 @@
+{
+  "id": "E09",
+  "description": "Submit repair with empty title",
+  "method": "POST",
+  "url": "/api/repairs",
+  "httpCode": "000",
+  "response": {"code":401,"message":"Missing token","data":null}
+200
+000
+}

@@ -1,38 +1,27 @@
-**Source Visual Truth**
-- Path: `D:\Users\20742\Downloads\ChatGPT Image 2026年6月27日 14_41_30.png`
-
-**Implementation Evidence**
-- Student dashboard screenshot: `D:\Users\20742\Desktop\宿舍报修管理系统\frontend-prototype\screenshots\redesign-student-dashboard.png`
-- Submit repair screenshot: `D:\Users\20742\Desktop\宿舍报修管理系统\frontend-prototype\screenshots\redesign-create.png`
-- Full comparison image: `D:\Users\20742\Desktop\宿舍报修管理系统\frontend-prototype\screenshots\design-qa-comparison.png`
-- Viewport checks: desktop `1440x900`, mobile `390x900`
-- States checked: student dashboard, submit repair, repair list, detail, feedback, auth, admin dashboard, dispatch, admin list, user list, repair dashboard, repair task list, repair submit
-
 **Findings**
-- No actionable P0/P1/P2 findings remain.
-- Typography: implementation uses Microsoft YaHei UI / system Chinese UI stack, matching the reference's practical admin-system feel. Heading scale and small table text are denser than the previous prototype and closer to the reference.
-- Spacing and layout rhythm: the shell now uses a narrow dark-teal sidebar, light workspace, compact cards, tighter tables, and reference-style form sections. Desktop route checks reported no page-level overflow.
-- Colors and visual tokens: main accent is green with dark teal navigation. Status colors use orange, blue, purple, and green as in the reference family. Button contrast passed visual inspection.
-- Image quality and asset fidelity: brand mark, auth illustration, and repair thumbnails are local raster assets cropped from the supplied reference image. No CSS illustration is used for those visual assets.
-- Copy and content: core repair workflow copy remains coherent for the dorm repair system and maps to the reference pages.
-- Responsiveness: mobile `390x900` checks passed for page width. Data tables intentionally scroll inside their table containers instead of forcing the whole page wider.
+- No blocking P0/P1/P2 visual issues remain after the mobile width fix.
+
+**Evidence**
+- source visual truth path: `frontend/原型图/ChatGPT Image 2026年6月28日 21_26_39 (2).png`
+- additional source screens reviewed: login, create repair, my repairs, detail, announcement, profile, admin overview, admin work order, dispatch
+- implementation screenshot path: `frontend/screenshots/student-home-desktop.png`
+- viewport: desktop 1440px check, mobile 390px check
+- state: logged-in student dashboard with live backend data
+- full-view comparison evidence: the implementation keeps the prototype's top navigation, pale blue-gray canvas, white cards, soft borders/shadows, blue primary actions, status pills, repair-category tiles, and dorm repair illustration language.
+- focused region comparison evidence: checked top navigation, hero card, statistic cards, quick repair category tiles, recent repair list, create form layout, admin dashboard cards/charts, and mobile stacked layout.
 
 **Open Questions**
-- The reference collage includes icon-library style glyphs. This static prototype keeps navigation mostly text-first and uses local raster assets for major visuals. Replacing every small glyph with an icon library would be a future Vue/Element Plus implementation step.
+- Announcement content is intentionally empty because the backend has no announcement API in the current contract.
 
 **Implementation Checklist**
-- Dark teal sidebar and green active states applied.
-- Student, admin, and repair dashboards restyled.
-- Submit repair page rebuilt with category tiles, compact fields, upload thumbnails, and action row.
-- Lists rebuilt with tabs, filters, dense table, and pagination.
-- Detail page rebuilt with progress steps and right-side repairer/records panel.
-- Login page rebuilt as a full-screen auth surface.
-- Local assets added under `frontend-prototype/assets/`.
-- Browser checks completed for desktop and mobile.
+- [x] Use generated bitmap dorm repair illustration instead of placeholder art.
+- [x] Keep controller actions connected to Axios API calls with JWT authorization.
+- [x] Align frontend role and status types to backend enum values.
+- [x] Fix CORS preflight by allowing `OPTIONS` through the JWT interceptor.
+- [x] Fix mobile horizontal overflow on dashboard cards.
 
 **Follow-up Polish**
-- P3: add a proper icon library when migrating to Vue 3 and Element Plus.
-- P3: replace reference-cropped repair thumbnails with real upload data once backend upload is implemented.
+- P3: If a formal announcement API is added later, wire the announcements screen to it.
+- P3: Add dedicated backend statistics for student satisfaction if the course demo needs that number on the student dashboard.
 
-**Final Result**
-- final result: passed
+final result: passed

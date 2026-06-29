@@ -1,6 +1,8 @@
 package com.dorm.repair.dto;
 
+import com.dorm.repair.common.UserRole;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class RegisterDTO {
 
@@ -14,7 +16,10 @@ public class RegisterDTO {
     private String realName;
 
     @NotBlank
+    @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
     private String phone;
+
+    private UserRole role;
 
     public String getUsername() {
         return username;
@@ -46,5 +51,13 @@ public class RegisterDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
