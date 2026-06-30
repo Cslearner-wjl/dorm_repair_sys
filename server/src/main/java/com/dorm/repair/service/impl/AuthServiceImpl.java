@@ -39,9 +39,8 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException(ErrorCode.CONFLICT, "账号已存在");
         }
 
-        UserRole role = dto.getRole() == null ? UserRole.STUDENT : dto.getRole();
-        if (role == UserRole.ADMIN) {
-            throw new BusinessException(ErrorCode.BAD_REQUEST, "管理员账号不能公开注册");
+        if (dto.getRole() != null && dto.getRole() != UserRole.STUDENT) {
+            throw new BusinessException(ErrorCode.BAD_REQUEST, "公开注册仅支持学生账号");
         }
 
         User user = new User();
@@ -49,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRealName(dto.getRealName());
         user.setPhone(dto.getPhone());
-        user.setRole(role);
+        user.setRole(UserRole.STUDENT);
         user.setStatus(STATUS_ENABLED);
         userMapper.insert(user);
         return toVO(user);

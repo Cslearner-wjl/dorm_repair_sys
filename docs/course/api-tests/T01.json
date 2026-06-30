@@ -1,0 +1,8 @@
+{
+  "id": "T01",
+  "description": "Student register and login",
+  "method": "POST",
+  "url": "/api/auth/login",
+  "httpCode": "200",
+  "response": {"code":200,"message":"login success","data":{"token":"jwt-token","user":{"id":1,"username":"student001","realName":"学生演示账号","phone":"13800000001","role":"STUDENT","status":1}}}
+}

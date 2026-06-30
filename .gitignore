@@ -20,6 +20,10 @@ yarn-error.log*
 pnpm-debug.log*
 .codex-run/
 
+# Local course delivery packages
+/宿舍报修管理系统课程报告.docx
+/docs/course/*.zip
+
 # Dependencies and build outputs
 node_modules/
 .npm-cache/

@@ -1,0 +1,91 @@
+# API 测试结果索引
+
+> 测试日期：2026-06-28
+> 测试环境：Spring Boot 3.3.5 + MySQL 8.0.42 + JDK 21
+> 测试方式：curl 命令行，结果以 JSON 文件保存
+> 状态码口径：下表“预期”指响应体中的业务 `code`，当前后端统一异常处理的 HTTP 状态为 200。
+
+## 一、权限测试 (Permission)
+
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
+|------|--------|------|------|------|
+| P01 | 未登录访问业务接口 | 401 | `Missing token` | ✅ |
+| P02 | 学生访问管理员 /api/users | 403 | `Permission denied` | ✅ |
+| P03 | 学生尝试修改角色 | 403 | `Permission denied` | ✅ |
+| P04 | 维修人员操作未派单工单 | 403 | 权限拒绝 | ✅ |
+| P05 | 学生确认他人的报修 | 403 | `Only order creator can operate` | ✅ |
+| P06 | 禁用用户登录 | 403 | `账号已被禁用` | ✅ |
+| P07 | 错误密码登录 | 400 | `账号或密码错误` | ✅ |
+| P08 | 不存在的用户登录 | 400 | `账号或密码错误` | ✅ |
+
+## 二、参数校验测试 (Validation)
+
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
+|------|--------|------|------|------|
+| E01 | 用户名为空注册 | 400 | `不能为空` (username) | ✅ |
+| E02 | 密码为空注册 | 400 | `不能为空` (password) | ✅ |
+| E03 | 手机号格式错误 | 400 | `手机号格式不正确` | ✅ |
+| E04 | 重复用户名注册 | 409 | `账号已存在` | ✅ |
+| E05 | 报修标题为空 | 400 | 校验失败 | ✅ |
+| E06 | 报修楼栋为空 | 400 | 校验失败 | ✅ |
+| E07 | 查询不存在的工单 | 404 | `Repair order not found` | ✅ |
+
+## 三、状态流转异常测试 (Status Flow)
+
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
+|------|--------|------|------|------|
+| S01 | 派单已完成的工单 | 409 | `Only approved or reassignment-needed orders can be assigned` | ✅ |
+| S02 | 开始已撤销的工单 | 403/409 | 业务拒绝 | ✅ |
+| S03 | 重复审核已审核工单 | 409 | 业务拒绝 | ✅ |
+| S04 | 学生修改已审核工单 | 403 | 权限拒绝 | ✅ |
+
+## 四、功能测试 (Functional)
+
+| 编号 | 测试项 | 结果 |
+|------|--------|------|
+| F01 | 完整流程：提交→审核→派单→处理→完成→确认→评价 | ✅ |
+| F02 | 工单详情含处理时间线和评价 | ✅ 7 条记录 |
+| F03 | 管理员统计概览 + 按状态/类型/维修人员 | ✅ |
+| U01 | 管理员用户列表 | ✅ |
+| U02 | 维修人员列表 | ✅ |
+| U03 | 管理员创建用户 | ✅ |
+| U04 | 管理员软删除用户 | ✅ |
+| D01 | 报修单软删除（deleted_at 有值，列表不显示） | ✅ |
+
+## 五、自动化测试补充 (JUnit)
+
+| 编号 | 测试项 | 覆盖文件 | 结果 |
+|------|--------|----------|------|
+| A01 | 公开注册传 `role=REPAIR` 被拒绝 | `AuthServiceImplTest.publicRegisterRejectsRepairRole` | ✅ |
+| A02 | 公开注册传 `role=ADMIN` 被拒绝 | `AuthServiceImplTest.publicRegisterRejectsAdminRole` | ✅ |
+| A03 | 公开注册不传角色时创建学生账号 | `AuthServiceImplTest.publicRegisterAlwaysCreatesStudentWhenRoleIsOmitted` | ✅ |
+| A04 | 学生不可访问管理员工单列表 | `RepairServiceImplTest.studentCannotAccessAdminRepairList` | ✅ |
+| A05 | 已完成工单不可再次派单 | `RepairServiceImplTest.completedOrderCannotBeAssignedAgain` | ✅ |
+| A06 | 非创建学生不可确认工单 | `RepairServiceImplTest.nonCreatorCannotConfirmOrder` | ✅ |
+| A07 | 非分配维修人员不可开始处理 | `RepairServiceImplTest.nonAssignedRepairerCannotStartOrder` | ✅ |
+| A08 | 完整状态流转可到确认评价 | `RepairServiceImplTest.fullRepairStateFlowCanReachFeedback` | ✅ |
+| A09 | 报修联系电话格式校验 | `RepairCreateDTOTest` | ✅ |
+
+本组测试于 2026-06-29 通过 `mvn test` 执行，结果：11 个测试全部通过。
+
+## 六、数据库验证 (Database)
+
+| 编号 | 验证项 | 结果 |
+|------|--------|------|
+| DB01 | 提交报修后 repair_orders 有记录 | ✅ |
+| DB02 | 派单后 repairer_id 更新 | ✅ |
+| DB03 | 状态变更写入 repair_records | ✅ 8 条处理记录 |
+| DB04 | 完成后 status = COMPLETED | ✅ |
+| DB05 | 评价后 repair_feedbacks 有记录 | ✅ |
+| DB06 | 软删除后 deleted_at 有值 | ✅ |
+| DB07 | 默认列表不显示已删除数据 | ✅ |
+
+## 发现并修复的问题
+
+| 问题 | 严重程度 | 状态 |
+|------|----------|------|
+| 公开注册可通过 `role=REPAIR` 创建维修人员账号 | 高 | ✅ 已修复并补测试 |
+| RegisterDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
+| UserCreateDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
+| UserUpdateDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
+| RepairCreateDTO 联系电话缺少 @Pattern 校验 | 中 | ✅ 已修复并补测试 |

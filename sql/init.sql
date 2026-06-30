@@ -1,14 +1,28 @@
-CREATE DATABASE IF NOT EXISTS dorm_repair
+-- =========================================================
+-- 宿舍报修管理系统 数据库初始化
+-- 适用场景：武汉理工大学宿舍报修管理系统课程验收
+-- 说明：本脚本会重建 dorm_repair 数据库及全部表结构。
+-- 导入前请确认已有数据可以被覆盖；如需保留，请先备份数据库。
+-- 建表完成后请执行 sql/demo-data.sql 导入验收演示数据。
+-- =========================================================
+
+DROP DATABASE IF EXISTS dorm_repair;
+CREATE DATABASE dorm_repair
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE dorm_repair;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS repair_feedbacks;
 DROP TABLE IF EXISTS repair_records;
 DROP TABLE IF EXISTS repair_orders;
 DROP TABLE IF EXISTS users;
 
+-- =========================================================
+-- 用户表
+-- =========================================================
 CREATE TABLE users (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
@@ -25,6 +39,9 @@ CREATE TABLE users (
   KEY idx_users_deleted_at (deleted_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- =========================================================
+-- 报修单表
+-- =========================================================
 CREATE TABLE repair_orders (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   order_no VARCHAR(30) NOT NULL,
@@ -37,7 +54,7 @@ CREATE TABLE repair_orders (
   description TEXT NOT NULL,
   image_urls TEXT NULL,
   contact_phone VARCHAR(20) NOT NULL,
-  status VARCHAR(30) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'PENDING',
   reject_reason VARCHAR(200) NULL,
   assigned_at DATETIME NULL,
   completed_at DATETIME NULL,
@@ -56,6 +73,9 @@ CREATE TABLE repair_orders (
     FOREIGN KEY (repairer_id) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- =========================================================
+-- 处理记录表
+-- =========================================================
 CREATE TABLE repair_records (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   order_id BIGINT NOT NULL,
@@ -71,6 +91,9 @@ CREATE TABLE repair_records (
     FOREIGN KEY (operator_id) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- =========================================================
+-- 评价表
+-- =========================================================
 CREATE TABLE repair_feedbacks (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   order_id BIGINT NOT NULL,
@@ -87,8 +110,4 @@ CREATE TABLE repair_feedbacks (
   CONSTRAINT ck_repair_feedbacks_score CHECK (score BETWEEN 1 AND 5)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO users (username, password, real_name, phone, role, status)
-VALUES
-  ('student001', '$2a$10$fy.1cwIwxYjwMDN5feK/C.g4xoiU3lcG0tHUIYi2kE/Z2/Y21j6KO', '学生演示账号', '13800000001', 'STUDENT', 1),
-  ('admin001', '$2a$10$fy.1cwIwxYjwMDN5feK/C.g4xoiU3lcG0tHUIYi2kE/Z2/Y21j6KO', '管理员演示账号', '13800000002', 'ADMIN', 1),
-  ('repair001', '$2a$10$fy.1cwIwxYjwMDN5feK/C.g4xoiU3lcG0tHUIYi2kE/Z2/Y21j6KO', '维修员演示账号', '13800000003', 'REPAIR', 1);
+SET FOREIGN_KEY_CHECKS = 1;

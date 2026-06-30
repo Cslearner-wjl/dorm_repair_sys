@@ -4,15 +4,21 @@
 
 ## 当前状态
 
-- 后端：Spring Boot + MyBatis + MySQL + JWT，主流程接口已实现，`mvn test` 已在 JDK 17 环境下通过。
-- 前端：React 19 + TypeScript + Vite，自定义 CSS 样式（无 UI 框架），页面已按模块拆分。
-- 数据库：初始化脚本位于 `sql/init.sql`，演示数据脚本位于 `sql/demo-data.sql`。
-- 文档：需求、设计、API、部署说明集中在 `docs/`。
+- 后端：Spring Boot + MyBatis + MySQL + JWT，主流程接口已实现；2026-06-29 运行 `mvn test` 成功，已执行 11 个后端单元测试且全部通过。
+- 前端：React 19 + TypeScript + Vite，自定义 CSS 样式（无 UI 框架），页面已按模块拆分；2026-06-29 运行 `npm run build` 成功。
+- 数据库：初始化脚本 `sql/init.sql`（建库建表），演示数据脚本 `sql/demo-data.sql`（插入验收数据）。
+- 文档：需求、设计、API、部署说明集中在 `docs/`，完成度审查见 `docs/项目完成情况.md`。
 
 ## 目录结构
 
 ```text
 .
+├── .gitignore                           # 忽略本地依赖、构建产物和运行缓存
+├── AGENTS.md                            # 项目协作与开发约定
+├── README.md                            # 项目说明与启动入口
+├── TODO.md                              # 验收收尾清单
+├── start-all.ps1                        # Windows PowerShell 一键启动脚本
+├── start-all.bat                        # Windows CMD 一键启动脚本
 ├── server/                              # Spring Boot 后端
 ├── frontend/                            # React 前端
 │   └── src/
@@ -59,8 +65,21 @@
 │       ├── icons.tsx                    # 分类图标映射
 │       └── styles.css                   # 全局样式
 ├── sql/                                 # 数据库初始化与演示数据
-├── docs/                                # 项目文档、设计、接口测试材料
-└── README.md
+│   ├── init.sql                         # 建库建表 + 基础账号
+│   └── demo-data.sql                    # 验收演示数据
+├── docs/                                # 项目文档、课程材料、截图和测试材料
+│   ├── course/                          # 课程任务书
+│   ├── design/                          # 设计说明、视觉 QA、原型图
+│   │   └── prototypes/                  # 原型图素材
+│   ├── screenshots/                     # 验收截图
+│   ├── api-tests/                       # 接口测试结果
+│   ├── 课程报告.md
+│   ├── 需求文档.md
+│   ├── 开发流程.md
+│   ├── 项目完成情况.md
+│   ├── API.md
+│   ├── deploy.md
+│   └── README.md                        # 文档索引
 ```
 
 ## 后端启动
@@ -95,11 +114,29 @@ npm run build      # 输出到 frontend/dist/
 npm run preview    # 预览生产构建
 ```
 
+如需修改 API 地址，可在前端启动或构建前设置：
+
+```powershell
+$env:VITE_API_BASE_URL="http://127.0.0.1:8080/api"
+```
+
+后端跨域白名单由 `CORS_ALLOWED_ORIGINS` 控制，默认允许 `http://localhost:5173` 和 `http://127.0.0.1:5173`。
+
+## 一键启动
+
+根目录提供本地演示脚本：
+
+```powershell
+.\start-all.ps1
+```
+
+脚本会默认打包后端、启动后端 `http://127.0.0.1:8080` 和前端 `http://127.0.0.1:5173/`。脚本启动前会清理 8080 和 5173 端口上的监听进程，已有本地服务时请先确认。
+
 ## 数据库初始化
 
 ```powershell
 mysql -uroot -proot --default-character-set=utf8mb4 < sql/init.sql
-mysql -uroot -proot dorm_repair < sql/demo-data.sql   # 可选：插入演示数据
+mysql -uroot -proot --default-character-set=utf8mb4 < sql/demo-data.sql
 ```
 
 ## 演示账号
@@ -109,3 +146,13 @@ mysql -uroot -proot dorm_repair < sql/demo-data.sql   # 可选：插入演示数
 | 学生 | student001 | 123456 | 提交报修、确认评价 |
 | 管理员 | admin001 | 123456 | 审核派单、统计管理 |
 | 维修员 | repair001 | 123456 | 处理维修任务 |
+
+## 文档索引
+
+- `docs/README.md`：文档总索引。
+- `docs/项目完成情况.md`：当前完成度、验证结果、剩余风险和验收建议。
+- `docs/课程报告.md`：按课程任务书撰写的 Markdown 课程报告。
+- `TODO.md`：验收前待办、风险优先级和材料清单。
+- `docs/API.md`：接口约定、请求示例和演示数据说明。
+- `docs/deploy.md`：部署、配置和本地演示启动说明。
+- `docs/api-tests/INDEX.md`：既有接口测试结果索引。

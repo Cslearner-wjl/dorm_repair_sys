@@ -3,10 +3,11 @@
 > 测试日期：2026-06-28
 > 测试环境：Spring Boot 3.3.5 + MySQL 8.0.42 + JDK 21
 > 测试方式：curl 命令行，结果以 JSON 文件保存
+> 状态码口径：下表“预期”指响应体中的业务 `code`，当前后端统一异常处理的 HTTP 状态为 200。
 
 ## 一、权限测试 (Permission)
 
-| 编号 | 测试项 | 预期 | 实际 | 结果 |
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
 |------|--------|------|------|------|
 | P01 | 未登录访问业务接口 | 401 | `Missing token` | ✅ |
 | P02 | 学生访问管理员 /api/users | 403 | `Permission denied` | ✅ |
@@ -19,7 +20,7 @@
 
 ## 二、参数校验测试 (Validation)
 
-| 编号 | 测试项 | 预期 | 实际 | 结果 |
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
 |------|--------|------|------|------|
 | E01 | 用户名为空注册 | 400 | `不能为空` (username) | ✅ |
 | E02 | 密码为空注册 | 400 | `不能为空` (password) | ✅ |
@@ -31,7 +32,7 @@
 
 ## 三、状态流转异常测试 (Status Flow)
 
-| 编号 | 测试项 | 预期 | 实际 | 结果 |
+| 编号 | 测试项 | 预期业务 code | 实际 | 结果 |
 |------|--------|------|------|------|
 | S01 | 派单已完成的工单 | 409 | `Only approved or reassignment-needed orders can be assigned` | ✅ |
 | S02 | 开始已撤销的工单 | 403/409 | 业务拒绝 | ✅ |
@@ -51,7 +52,23 @@
 | U04 | 管理员软删除用户 | ✅ |
 | D01 | 报修单软删除（deleted_at 有值，列表不显示） | ✅ |
 
-## 五、数据库验证 (Database)
+## 五、自动化测试补充 (JUnit)
+
+| 编号 | 测试项 | 覆盖文件 | 结果 |
+|------|--------|----------|------|
+| A01 | 公开注册传 `role=REPAIR` 被拒绝 | `AuthServiceImplTest.publicRegisterRejectsRepairRole` | ✅ |
+| A02 | 公开注册传 `role=ADMIN` 被拒绝 | `AuthServiceImplTest.publicRegisterRejectsAdminRole` | ✅ |
+| A03 | 公开注册不传角色时创建学生账号 | `AuthServiceImplTest.publicRegisterAlwaysCreatesStudentWhenRoleIsOmitted` | ✅ |
+| A04 | 学生不可访问管理员工单列表 | `RepairServiceImplTest.studentCannotAccessAdminRepairList` | ✅ |
+| A05 | 已完成工单不可再次派单 | `RepairServiceImplTest.completedOrderCannotBeAssignedAgain` | ✅ |
+| A06 | 非创建学生不可确认工单 | `RepairServiceImplTest.nonCreatorCannotConfirmOrder` | ✅ |
+| A07 | 非分配维修人员不可开始处理 | `RepairServiceImplTest.nonAssignedRepairerCannotStartOrder` | ✅ |
+| A08 | 完整状态流转可到确认评价 | `RepairServiceImplTest.fullRepairStateFlowCanReachFeedback` | ✅ |
+| A09 | 报修联系电话格式校验 | `RepairCreateDTOTest` | ✅ |
+
+本组测试于 2026-06-29 通过 `mvn test` 执行，结果：11 个测试全部通过。
+
+## 六、数据库验证 (Database)
 
 | 编号 | 验证项 | 结果 |
 |------|--------|------|
@@ -67,6 +84,8 @@
 
 | 问题 | 严重程度 | 状态 |
 |------|----------|------|
+| 公开注册可通过 `role=REPAIR` 创建维修人员账号 | 高 | ✅ 已修复并补测试 |
 | RegisterDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
 | UserCreateDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
 | UserUpdateDTO 手机号缺少 @Pattern 校验 | 中 | ✅ 已修复 |
+| RepairCreateDTO 联系电话缺少 @Pattern 校验 | 中 | ✅ 已修复并补测试 |

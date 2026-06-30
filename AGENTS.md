@@ -22,7 +22,7 @@ This repository contains a dormitory repair management system for course deliver
 - `frontend/src/utils.ts`: `cn()`, `formatDateTime()`, `formatFullDateTime()`, `maskPhone()`, `statusClass()`, `statusLabel()`, `roleHome()`, `countByStatus()`, `emptyPage()`, `chartColor()`, `buildDonut()`.
 
 ### Database & Docs
-- `sql/`: database scripts. Use `init.sql` first, then `demo-data.sql` when demo accounts are needed.
+- `sql/`: database scripts. Use `init.sql` first to create the database, then `demo-data.sql` to load demo data.
 - `docs/`: API, deployment, design, and testing documentation.
 
 ## Build, Test, and Development Commands

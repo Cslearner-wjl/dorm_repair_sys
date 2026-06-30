@@ -1,0 +1,2 @@
+id	order_no	status	deleted_at
+1	BX202606282537	COMPLETED	2026-06-28 20:42:22

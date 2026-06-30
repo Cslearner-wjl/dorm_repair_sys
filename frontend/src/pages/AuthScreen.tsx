@@ -3,6 +3,7 @@ import { KeyRound, Phone, UserRound, Wrench } from "lucide-react";
 import { DEMO_ACCOUNTS, HERO_IMAGE } from "../constants";
 import type { ToastMessage } from "../types";
 import { authApi } from "../api";
+import { AuthSlogan } from "../components/AuthSlogan";
 import { ToastBar } from "../components/ToastBar";
 
 export function AuthScreen({
@@ -58,7 +59,6 @@ export function AuthScreen({
           </div>
           <nav className="auth-nav-links" aria-label="登录页导航">
             <button type="button" className="active">首页</button>
-            <button type="button">服务介绍</button>
             <button type="button">帮助</button>
             <button type="button">简体中文</button>
           </nav>
@@ -66,18 +66,7 @@ export function AuthScreen({
 
         <main className="auth-main">
           <section className="auth-visual" aria-label="宿舍维修服务介绍">
-            <div className="auth-copy">
-              <span className="auth-kicker">
-                <Wrench size={14} />
-                校园宿舍维修服务
-              </span>
-              <h1>
-                让宿舍维修
-                <br />
-                更高效、更透明
-              </h1>
-              <p>一站式报修 · 进度可查 · 服务可评</p>
-            </div>
+            <AuthSlogan />
             <div className="auth-image-stage" role="img" aria-label="宿舍维修插画">
               <span className="auth-image-blur" />
               <div
@@ -91,7 +80,7 @@ export function AuthScreen({
             <section className="auth-card">
               <div className="auth-card-head">
                 <h2>{mode === "register" ? "学生注册" : "账号登录"}</h2>
-                <p>请输入账号信息，或使用演示账号快速体验</p>
+                <p>{mode === "register" ? "公开注册仅面向学生账号" : "请输入账号信息，或使用演示账号快速体验"}</p>
               </div>
               <div className="auth-tabs">
                 <button type="button" className={mode === "login" ? "active" : ""} onClick={() => setMode("login")}>账号登录</button>
@@ -124,7 +113,14 @@ export function AuthScreen({
                       <span>手机号</span>
                       <div className="input-with-icon">
                         <Phone size={18} />
-                        <input value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="请输入 11 位手机号" required />
+                        <input
+                          value={phone}
+                          onChange={(event) => setPhone(event.target.value)}
+                          placeholder="请输入 11 位手机号"
+                          pattern="^1[3-9]\d{9}$"
+                          maxLength={11}
+                          required
+                        />
                       </div>
                     </label>
                   </>
@@ -140,11 +136,13 @@ export function AuthScreen({
                   {saving ? "提交中..." : mode === "register" ? "注册并登录" : "登录系统"}
                 </button>
               </form>
-              <div className="demo-row">
-                {DEMO_ACCOUNTS.map((account) => (
-                  <button type="button" key={account.username} onClick={() => applyDemo(account)}>{account.label}</button>
-                ))}
-              </div>
+              {mode === "login" && (
+                <div className="demo-row">
+                  {DEMO_ACCOUNTS.map((account) => (
+                    <button type="button" key={account.username} onClick={() => applyDemo(account)}>{account.label}</button>
+                  ))}
+                </div>
+              )}
             </section>
           </section>
         </main>
